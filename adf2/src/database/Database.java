@@ -15,9 +15,13 @@ import model.Students;
 
 public class Database {
 	
+	// Database Credentials
+	
 	private String jdbcURL= "jdbc:mysql://localhost:3306/Student";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "root";
+	
+	// SQL Queries stored as final Strings
 	
 	private static final String INSERT_STUDENT_SQL = "INSERT INTO StudentPersonalDetails" + "(name,age,gender,height,weight,phone,email,address) VALUES" + "(?,?,?,?,?,?,?,?);";
 	private static final String INSERT_PARENT_SQL = "INSERT INTO ParentsPersonalDetails" + "(id,father_name,mother_name, father_age, mother_age, father_occupation, mother_occupation,phone,email,address) VALUES" + "(?,?,?,?,?,?,?,?,?,?);";
@@ -26,15 +30,15 @@ public class Database {
 	
 	private static final String SELECT_STUDENT = "select id,name,age,gender,height,weight,phone,email,address from StudentPersonalDetails where id =?;";
 	private static final String SELECT_STUDENTS = "select * from StudentPersonalDetails;";
-	private static final String SELECT_PARENT = "select id,father_name,mother_name, father_age, mother_age, father_occupation, mother_occupation,phone,email,address from ParentPersonalDetails where id =?;";
-	private static final String SELECT_PARENTS = "select * from ParentPersonalDetails;";
-	private static final String SELECT_ACADEMY = "select sid,school,marks,remarks,skills,year from AcademyDetails where id =?;";
+	private static final String SELECT_PARENT = "select id,father_name,mother_name, father_age, mother_age, father_occupation, mother_occupation,phone,email,address from ParentsPersonalDetails where id =?;";
+	private static final String SELECT_PARENTS = "select * from ParentsPersonalDetails;";
+	private static final String SELECT_ACADEMY = "select sid,school,marks,remarks,skills,year from AcademyDetails where sid =?;";
 	private static final String SELECT_ACADEMY_RECORDS = "select * from AcademyDetails;";
 	private static final String SELECT_PAYMENT = "select id,recipient,phone,bank,amount,paid_on,due,due_on from PaymentDetails where id =?;";
 	private static final String SELECT_PAYMENTS = "select * from PaymentDetails;";
 	
-	private static final String UPDATE_STUDENT_SQL = "update StudentPersonalDetails set name = ?, email = ?, country = ? where id = ?;";
-	private static final String UPDATE_PARENT_SQL = "update ParentPersonalDetails set id =? ,father_name = ?, mother_name = ?, father_age = ?, mother_age = ?, father_occupation = ?, mother_occupation = ?,phone = ?,email = ?,address = ? where id = ?;";
+	private static final String UPDATE_STUDENT_SQL = "update StudentPersonalDetails set name = ?, age=?, gender=?, height=?, weight=?, phone=?, email=?, address=? where id = ?;";
+	private static final String UPDATE_PARENTS_SQL = "update ParentsPersonalDetails set id =? ,father_name = ?, mother_name = ?, father_age = ?, mother_age = ?, father_occupation = ?, mother_occupation = ?,phone = ?,email = ?,address = ? where id = ?;";
 	private static final String UPDATE_ACADEMY_SQL = "update AcademyDetails set sid = ?,school = ?,marks = ?,remarks = ?,skills = ?, year = ? where sid = ?;";
 	private static final String UPDATE_PAYMENT_SQL = "update PaymentDetails set id = ?,recipient = ?,phone = ?,bank = ?,amount = ?,paid_on = ?,due = ?,due = ? where id = ?;";
 	
@@ -135,7 +139,6 @@ public class Database {
 		try(Connection connection = getConnection()){
 			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_STUDENT);
 			preparedStatement.setInt(1, id);
-			System.out.println(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				String name = rs.getString("name");
@@ -159,7 +162,6 @@ public class Database {
 		List<Students> students = new ArrayList<>();
 		try(Connection connection = getConnection()){
 			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_STUDENTS);
-			System.out.println(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				String name = rs.getString("name");
@@ -184,7 +186,6 @@ public class Database {
 		try(Connection connection = getConnection()){
 			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PARENT);
 			preparedStatement.setInt(1, id);
-			System.out.println(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				int sid = rs.getInt("id");
@@ -210,7 +211,6 @@ public class Database {
 		List<Parents> parents = new ArrayList<>();
 		try(Connection connection = getConnection()){
 			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PARENTS);
-			System.out.println(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				int sid = rs.getInt("id");
@@ -237,7 +237,6 @@ public class Database {
 		try(Connection connection = getConnection()){
 			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ACADEMY);
 			preparedStatement.setInt(1, id);
-			System.out.println(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				String school = rs.getString("school");
@@ -254,14 +253,13 @@ public class Database {
 	}
 				
 	// select all academy record
-	public List<Academy> selectAcademy() throws SQLException {
+	public List<Academy> selectAcademies() throws SQLException {
 		List<Academy> academy = new ArrayList<>();
 		try(Connection connection = getConnection()){
 			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ACADEMY_RECORDS);
-			System.out.println(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				int id = rs.getInt("id");
+				int id = rs.getInt("sid");
 				String school = rs.getString("school");
 				int marks = rs.getInt("marks");
 				String remarks = rs.getString("remarks");
@@ -281,7 +279,6 @@ public class Database {
 		try(Connection connection = getConnection()){
 			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PAYMENT);
 			preparedStatement.setInt(1, id);
-			System.out.println(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				String recipient = rs.getString("recipient");
@@ -304,7 +301,6 @@ public class Database {
 		List<Payment> payment = new ArrayList<>();
 		try(Connection connection = getConnection()){
 			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PAYMENTS);
-			System.out.println(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("id");
@@ -323,9 +319,23 @@ public class Database {
 		return payment;
 	}
 	
+	// select name with given id
+	public int getStudentId(String name) throws SQLException {
+		int id=0;
+		try(Connection connection = getConnection()){
+			PreparedStatement preparedStatement = connection.prepareStatement("select id from StudentPersonalDetails where name = ?;");
+			preparedStatement.setString(1, name);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				id = rs.getInt("id");
+			}
+		}
+		return id;
+	}
+	
 	// UPDATE DATA OF RECORDS IN DATABASE
 	// update the data of student
-	public boolean updateStudent(Students student) throws SQLException{
+	public boolean updateStudent(int id, Students student) throws SQLException{
 		boolean rowUpdated;
 		try(Connection connection = getConnection()){
 			PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_STUDENT_SQL);
@@ -337,6 +347,7 @@ public class Database {
 			preparedStatement.setString(6, student.getPhone());
 			preparedStatement.setString(7, student.getEmail());
 			preparedStatement.setString(8, student.getAddress());
+			preparedStatement.setInt(9, id);
 			
 			rowUpdated = preparedStatement.executeUpdate()>0;
 		}
@@ -347,7 +358,7 @@ public class Database {
 	public boolean updateParent(Parents parent) throws SQLException{
 		boolean rowUpdated;
 		try(Connection connection = getConnection()){
-			PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PARENT_SQL);
+			PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PARENTS_SQL);
 			preparedStatement.setInt(1, parent.getId());
 			preparedStatement.setString(2, parent.getFather_name());
 			preparedStatement.setString(3, parent.getMother_name());
@@ -358,6 +369,7 @@ public class Database {
 			preparedStatement.setString(8, parent.getPhone());
 			preparedStatement.setString(9, parent.getEmail());
 			preparedStatement.setString(10, parent.getAddress());
+			preparedStatement.setInt(11, parent.getId());
 			
 			rowUpdated = preparedStatement.executeUpdate()>0;
 		}
@@ -375,6 +387,7 @@ public class Database {
 			preparedStatement.setString(4, academy.getRemarks());
 			preparedStatement.setString(5, academy.getSkills());
 			preparedStatement.setInt(6, academy.getYear());
+			preparedStatement.setInt(7, academy.getId());
 			
 			rowUpdated = preparedStatement.executeUpdate()>0;
 		}
@@ -394,6 +407,7 @@ public class Database {
 			preparedStatement.setString(6, payment.getPaid_on());
 			preparedStatement.setInt(7, payment.getDue());
 			preparedStatement.setString(8, payment.getDue_on());
+			preparedStatement.setInt(9, payment.getId());
 			
 			rowUpdated = preparedStatement.executeUpdate()>0;
 		}

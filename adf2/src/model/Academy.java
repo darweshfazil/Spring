@@ -1,8 +1,6 @@
 package model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-public class Academy implements School {
+public class Academy{
 
 	private int id;
 	private String school;
@@ -71,29 +69,4 @@ public class Academy implements School {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-//	@Override
-//	public void insertRecord() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void deleteRecord() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void updateRecord() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void displayRecord() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-	
 }

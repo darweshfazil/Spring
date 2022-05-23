@@ -1,6 +1,8 @@
 package model;
 
-public class Students implements School{
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class Students{
 	
 	private String name;
 	private int age;
@@ -15,6 +17,7 @@ public class Students implements School{
 		
 	}
 	
+	@Autowired
 	public Students(String name, int age, char gender, int height, int weight, String phone, String email, String address) {
 		this.name = name;
 		this.age = age;
@@ -89,27 +92,4 @@ public class Students implements School{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-//	@Override
-//	public void insertRecord() {
-//		System.out.println("Hi");
-//	}
-//
-//	@Override
-//	public void deleteRecord() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void updateRecord() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void displayRecord() {
-//		// TODO Auto-generated method stub
-//		
-//	}
 }

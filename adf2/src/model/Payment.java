@@ -1,8 +1,6 @@
 package model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-public class Payment implements School {
+public class Payment{
 	
 	private int id;
 	private String recipient;
@@ -90,29 +88,5 @@ public class Payment implements School {
 
 	public void setDue_on(String due_on) {
 		this.due_on = due_on;
-	}
-
-//	@Override
-//	public void insertRecord() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void deleteRecord() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void updateRecord() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void displayRecord() {
-//		// TODO Auto-generated method stub
-//		
-//	}	
+	}	
 }
