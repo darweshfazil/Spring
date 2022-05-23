@@ -8,11 +8,11 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-import database.Database;
 import model.Academy;
 import model.Parents;
 import model.Payment;
 import model.Students;
+import operations.Database;
 
 public class StudentApplication {
 

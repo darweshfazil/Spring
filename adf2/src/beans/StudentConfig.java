@@ -3,8 +3,8 @@ package beans;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import database.Database;
 import model.Students;
+import operations.Database;
 
 @Configuration
 public class StudentConfig {
