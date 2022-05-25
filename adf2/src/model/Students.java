@@ -1,11 +1,12 @@
 package model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class Students{
 	
+	private String regno;
 	private String name;
 	private int age;
+	private String std;
+	private char section;
 	private char gender;
 	private int height;
 	private int weight;
@@ -16,17 +17,60 @@ public class Students{
 	public Students() {
 		
 	}
-	
-	@Autowired
-	public Students(String name, int age, char gender, int height, int weight, String phone, String email, String address) {
+
+	public Students(String regno, String name) {
+		this.name = name;
+		this.regno = regno;
+	}
+	public Students(String name, int age, String std, char section, char gender, int height, int weight, String phone, String email, String address) {
 		this.name = name;
 		this.age = age;
+		this.std = std;
+		this.section = section;
 		this.gender = gender;
 		this.height = height;
 		this.weight = weight;
 		this.phone = phone;
 		this.email = email;
 		this.address = address;
+	}
+
+	public Students(String regno, String name, int age, String std, char section, char gender, int height, int weight, String phone, String email, String address) {
+		this.regno = regno;
+		this.name = name;
+		this.age = age;
+		this.std = std;
+		this.section = section;
+		this.gender = gender;
+		this.height = height;
+		this.weight = weight;
+		this.phone = phone;
+		this.email = email;
+		this.address = address;
+	}
+	
+	public String getRegno() {
+		return regno;
+	}
+
+	public void setRegno(String regno) {
+		this.regno = regno;
+	}
+	
+	public String getStd() {
+		return std;
+	}
+
+	public void setStd(String std) {
+		this.std = std;
+	}
+
+	public char getSection() {
+		return section;
+	}
+
+	public void setSection(char section) {
+		this.section = section;
 	}
 
 	public String getName() {

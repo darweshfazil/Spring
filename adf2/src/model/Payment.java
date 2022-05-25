@@ -2,7 +2,8 @@ package model;
 
 public class Payment{
 	
-	private int id;
+	private String transactionId;
+	private String regno;
 	private String recipient;
 	private String phone;
 	private String bank;
@@ -15,8 +16,9 @@ public class Payment{
 		
 	}
 	
-	public Payment(int id, String recipient, String phone, String bank, int amount, String paid_on, int due, String due_on) {
-		this.id = id;
+	public Payment(String transactionId, String regno, String recipient, String phone, String bank, int amount, String paid_on, int due, String due_on) {
+		this.transactionId = transactionId;
+		this.regno = regno;
 		this.recipient = recipient;
 		this.phone = phone;
 		this.bank = bank;
@@ -26,12 +28,25 @@ public class Payment{
 		this.due_on = due_on;
 	}
 	
-	public int getId() {
-		return id;
+	
+	public String getTransactionId() {
+		return transactionId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
+
+	public void setRegno(String regno) {
+		this.regno = regno;
+	}
+
+	public String getRegno() {
+		return regno;
+	}
+
+	public void setId(String regno) {
+		this.regno = regno;
 	}
 
 	public String getRecipient() {

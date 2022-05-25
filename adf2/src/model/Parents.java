@@ -4,7 +4,7 @@ package model;
 
 public class Parents{
 	
-	private int id;
+	private String regno;
 	private String father_name;
 	private String mother_name;
 	private int father_age;
@@ -20,8 +20,8 @@ public class Parents{
 		
 	}
 	
-	public Parents(int id,String father_name, String mother_name, int father_age, int mother_age, String father_occupation, String mother_occupation, String phone, String email, String address) {
-		this.id = id;
+	public Parents(String regno,String father_name, String mother_name, int father_age, int mother_age, String father_occupation, String mother_occupation, String phone, String email, String address) {
+		this.regno = regno;
 		this.father_name = father_name;
 		this.mother_name = mother_name;
 		this.father_age = father_age;
@@ -31,6 +31,11 @@ public class Parents{
 		this.phone = phone;
 		this.email = email;
 		this.address = address;
+	}
+
+	
+	public void setFather_occupation(String father_occupation) {
+		this.father_occupation = father_occupation;
 	}
 
 	public String getFather_name() {
@@ -81,12 +86,12 @@ public class Parents{
 		this.mother_occupation = mother_occupation;
 	}
 
-	public int getId() {
-		return id;
+	public String getRegno() {
+		return regno;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setRegno(String regno) {
+		this.regno = regno;
 	}
 
 	public String getPhone() {

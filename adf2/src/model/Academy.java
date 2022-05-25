@@ -2,7 +2,7 @@ package model;
 
 public class Academy{
 
-	private int id;
+	private String regno;
 	private String school;
 	private int marks;
 	private String remarks;
@@ -13,8 +13,8 @@ public class Academy{
 		
 	}
 	
-	public Academy(int id, String school, int marks, String remarks, String skills, int year) {
-		this.id = id;
+	public Academy(String regno, String school, int marks, String remarks, String skills, int year) {
+		this.regno = regno;
 		this.school = school;
 		this.marks = marks;
 		this.remarks = remarks;
@@ -62,11 +62,11 @@ public class Academy{
 		this.year = year;
 	}
 	
-	public int getId() {
-		return id;
+	public String getRegno() {
+		return regno;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setRegno(String regno) {
+		this.regno = regno;
 	}
 }
